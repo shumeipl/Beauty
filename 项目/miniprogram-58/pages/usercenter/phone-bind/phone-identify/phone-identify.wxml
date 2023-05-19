@@ -1,0 +1,5 @@
+<!--pages/edit-tel/identify/identify.wxml-->
+<view class="box">
+<input class="identify-code" bindinput="getIdentifyCode" placeholder="验证码"/>
+<view class="send" bindtap="bind">绑定</view>
+</view>

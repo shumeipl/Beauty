@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.Cart_goodInfoMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Cart_goodInfo">
+        <result column="selected" jdbcType="INTEGER" property="selected"></result>
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="good_image1" jdbcType="VARCHAR" property="goodImage1"></result>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"></result>
+        <result column="good_price" jdbcType="DECIMAL" property="goodPrice"></result>
+        <result column="good_storage" jdbcType="INTEGER" property="goodStorage"></result>
+        <result column="cart_date" jdbcType="DATE" property="cartDate"></result>
+        <result column="good_num" jdbcType="INTEGER" property="goodNum"></result>
+    </resultMap>
+    <select id="getGoodId" resultType="java.lang.Integer">
+        select good_id from cart where user_id=#{userId} and shopper_id=#{shopperId};
+    </select>
+    <select id="getGoodInfo" resultMap="BaseResultMap">
+        select cart.good_id,cart_date,selected,good_storage,good_image1,good_price,good_num,good_name
+from cart,good where cart.good_id=good.good_id and cart.good_id=#{goodId} and good_num>0;
+    </select>
+
+</mapper>

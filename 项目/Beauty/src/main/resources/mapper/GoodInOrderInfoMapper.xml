@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.GoodInOrderInfoMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.GoodInOrderInfo">
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="good_Num" jdbcType="INTEGER" property="goodNum"></result>
+        <result column="good_price" jdbcType="DECIMAL" property="goodPrice"></result>
+        <result column="good_image1" jdbcType="VARCHAR" property="goodImage1"></result>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"></result>
+        <result column="order_shopperId" jdbcType="INTEGER" property="shopperId"></result>
+        <result column="good_feature" jdbcType="VARCHAR" property="feature"></result>
+    </resultMap>
+    <select id="query" resultMap="BaseResultMap">
+        select orders.good_id,orders.good_Num,good_price,good_image1,good_name,order_shopperId,good_feature from
+    orders,good where orders.good_id=good.good_id and orders.good_id=#{goodId} and orders.user_id=#{userId}
+and order_hao=#{s} and order_status in (0,1,2,3,4);
+    </select>
+    <select id="queryAll" resultType="com.pengling.beauty.entity.GoodInOrderInfo">
+        select orders.good_id,orders.good_Num,good_price,good_image1,good_name,order_shopperId,good_feature from
+                                                                                   orders,good where orders.good_id=good.good_id and orders.good_id=#{goodId} and orders.user_id=#{userId};
+    </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.SmallCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.smallCategory">
+        <result column="smallcategory_id" jdbcType="INTEGER" property="smallCategoryId"></result>
+        <result column="category_id" jdbcType="VARCHAR" property="categoryId"></result>
+        <result column="smallcategory_name" jdbcType="INTEGER" property="smallCategoryName"></result>
+    </resultMap>
+    <select id="selectSmallCategoryByCategoryName" resultMap="BaseResultMap" parameterType="String">
+        select * from category,smallcategory where category.category_name=#{name} and category.category_id
+=smallcategory.category_id;
+    </select>
+
+</mapper>

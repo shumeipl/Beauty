@@ -1,0 +1,178 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: whitesmoke;
+}
+.header{
+    background-color: #12192c;
+    display: flex;
+    color: seashell;
+    height: 60px;
+    align-items: center;
+}
+.header-firstText,.header-thirdText{
+    font-weight: 550;
+    margin-left: 15px;
+}
+.header-secondText{
+    margin-left: 10px;
+}
+.center{
+    background-color: whitesmoke;
+    width: inherit;
+    height: 80px;
+}
+.center{
+    display: flex;
+}
+
+input{
+    outline: none;
+    height: 25px;
+}
+.center-second{
+    display: flex;
+    height: 30px;
+    margin-top:40px;
+    margin-left: 800px;
+}
+.center-second-second{
+    background-color: blue;
+    width: 40px;
+    height: 30px;
+    margin-left: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: small;
+}
+table{
+    margin-left: 15px;
+    margin: 10px auto;
+    background-color: white;
+    border: 1px solid gainsboro;
+}
+.content-table-class01{
+    width: 100px;
+    text-align: left;
+    font-weight: 500;
+    font-size: small;
+    height: 30px;
+    line-height:30px ;
+    background-color: white;
+    color: gray;
+    padding: 5px;
+
+}
+.content-table-class02{
+    width: 300px;
+    background-color: white;
+    text-align: left;
+    font-weight: 500;
+    font-size: small;
+    height: 30px;
+    line-height:30px ;
+    color: gray;
+}
+td{
+    font-size: small;
+    padding: 6px;
+}
+table:nth-child(odd){
+    background-color: whitesmoke;
+}
+.content-table-edit{
+    border: 1px solid whitesmoke;
+    background-color: white;
+    width: 50px;
+    border:10px saddlebrown solid ;
+}
+.content-table-delete{
+    border: 1px solid #D24D57;
+    background-color: #D24D57;
+    width: 50px;
+}
+.box-01{
+    border: 1px gainsboro solid;
+    height: 500px;
+    width: 450px;
+    background-color:white;
+    margin-top: 20px;
+    position: fixed;
+    left: 35%;
+    top: 10%;
+    display: none;
+}
+.edit-01{
+    border: 1px gainsboro solid;
+    height: 500px;
+    width: 450px;
+    background-color:white;
+    margin-top: 20px;
+    position: fixed;
+    left: 35%;
+    top: 10%;
+    display: none;
+}
+.box-02{
+    height: 500px;
+    width: 400px;
+    margin-left: 25px;
+}
+.edit-02{
+    height: 500px;
+    width: 400px;
+    margin-left: 25px;
+}
+.box-03{
+    display: flex;
+}
+.box-03,.box-03-button{
+    margin-top: 30px;
+}
+.edit-03{
+    display: flex;
+}
+.edit-03,.edit-03-button{
+    margin-top: 30px;
+}
+.input-v{
+    height: 30px;
+    width: 240px;
+}
+.box-03>div{
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+}
+.box-03-button{
+    border: 1px springgreen solid;
+    width: 150px;
+    color: white;
+    font-weight: bold;
+    background-color: deepskyblue;
+    justify-content:center;
+    height: 40px;
+    margin-left: 125px;
+    outline: none;
+}
+.edit-03>div{
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+}
+.edit-03-button{
+    border: 1px springgreen solid;
+    width: 150px;
+    color: white;
+    font-weight: bold;
+    background-color: deepskyblue;
+    justify-content:center;
+    height: 40px;
+    margin-left: 125px;
+    outline: none;
+}

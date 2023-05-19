@@ -1,0 +1,54 @@
+<view wx:if="{{!hasLogin}}" class="cart-empty">
+	<t-image t-class="cart-img" src="{{imgUrl}}" />
+	<view class="tip">您还未登录</view>
+	<view class="btn" bind:tap="gotoLogin">去登录</view>
+</view>
+<view wx:if="{{hasLogin}}">
+<view wx:if="{{!hasCartInfo}}" class="cart-empty">
+	<t-image t-class="cart-img" src="{{imgUrl}}" />
+	<view class="tip">{{tip}}</view>
+	<view class="btn" bind:tap="handleClick">{{btnText}}</view>
+</view>
+<view wx:if="{{hasCartInfo}}">
+  <view wx:for="{{cartInfo}}" wx:key="item" class="box" bindtap="getIndex"  data-index="{{index}}">
+  <!-- 店铺card -->
+  <view>
+  <!-- 店铺名字 -->
+  <view class="shopperInfo-wrap">
+<icon color="{{item.allSelected==1?'#FA4126' : '#BBBBBB'}}" bindtap="btnQuanXuan" data-index="{{index}}" type="{{item.allSelected==1?'success':'circle'}}"></icon>
+  <image class="shopper-image" src="../../images/店铺.png"></image>
+  <view class="shopper-name">{{item.shopper_name}}</view>
+  </view> 
+  <!-- 商品card -->
+  <view wx:for="{{item.goodInfos}}" wx:for-item="goodInfo" wx:key="goodInfo" class="goods"  >
+   <view class="{{goodInfo.active?'good-card-active':'good-card'}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+    <view class="good-wrap">
+  <icon color="{{goodInfo.selected==1?'#FA4126' : '#BBBBBB'}}"  data-index="{{index}}" bindtap="btnGoodIcon" class="shopper-icon"  type="{{goodInfo.selected==1?'success':'circle'}}"></icon>
+  <image src="{{goodInfo.goodImage1}}" bindtap="gotoGoodDetail" class="image" data-index="{{index}}"></image>
+  <view>
+  <view class="good-name" bindtap="gotoGoodDetail" data-index="{{index}}">{{goodInfo.goodName}}</view>
+  <view style="display: flex;">
+  <view class="good-num-operation">
+  <view class="desc" bindtap="desc" style="background-color:{{goodInfo.goodNum==1?'gainsboro':'whitesmoke'}};" data-index="{{index}}">－</view>
+  <input data-index="{{index}}" class="good-num" bindinput="changeNumber"  value="{{goodInfo.goodNum}}" />
+  <view class="add" bindtap="add" data-index="{{index}}">＋</view>
+  </view>
+  <view class="good-price"><view style="font-weight: 700;font-size: larger;margin-top: -10rpx;">￥</view>{{goodInfo.goodPrice}}</view>
+</view>
+</view>
+  </view>
+  <view class="del" id="{{goodInfo.goodId}}" bindtap="delete">删除</view>
+</view>
+ </view>
+  </view>
+  </view>
+</view>
+</view>
+<!-- 底部结算按钮 -->
+<view class="jieSuan">
+<icon bindtap="quanXuan" type="{{quanxuan?'success':'circle'}}" color="{{quanxuan?'#FA4126' : '#BBBBBB'}}"  class="quanxuan-icon" ></icon>
+<view class="quanxuan-text">全选</view>
+<view class="zongjiage"><view style="font-weight: 700;font-size: small;margin-top: -10rpx;">总计￥{{zongJia}}</view></view>
+<view class="jiesuan-button" bindtap="jieSuan">结算</view>
+</view>
+

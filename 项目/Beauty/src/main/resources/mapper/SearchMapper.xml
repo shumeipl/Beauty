@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.SearchMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Search">
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="search_content" jdbcType="VARCHAR" property="searchContent"></result>
+        <result column="search_date" jdbcType="VARCHAR" property="searchDate"></result>
+    </resultMap>
+    <insert id="addSearch">
+        insert into search (user_id,search_content,search_date) values(#{userId},#{searchContent},#{searchDate});
+    </insert>
+    <select id="getSearchList" resultType="string">
+        select search_content from search where user_id=#{userId} order by search_date desc limit 0,10;
+    </select>
+
+</mapper>

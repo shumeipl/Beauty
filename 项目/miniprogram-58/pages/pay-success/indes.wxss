@@ -1,0 +1,49 @@
+.box{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 150rpx;
+}
+.icon{
+  width: 60rpx;
+  height: 60rpx;
+}
+.first,.second{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.second{
+  margin-top: 30rpx;
+}
+.first-text{
+  font-weight: 550;
+  margin-left: 10rpx;
+  font-size: large;
+}
+
+.second-price{
+  color: #fa4126;
+}
+.third{
+  display: flex;
+  margin-top: 30rpx;
+}
+.third-button01,.third-button02{
+  border: 1px solid  #fa4126;
+  color: #fa4126;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  width: 300rpx;
+}
+.third-button02{
+  margin-left: 66rpx;
+}
+.third-button01:active{
+  background-color: #fa4126;
+}
+.third-button02:active{
+  background-color: #fa4126;
+}

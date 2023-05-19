@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Order">
+        <result column="order_id" jdbcType="INTEGER" property="orderId"></result>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"></result>
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"></result>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"></result>
+        <result column="good_Num" jdbcType="VARCHAR" property="goodNum"></result>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"></result>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"></result>
+        <result column="district_name" jdbcType="VARCHAR" property="districtName"></result>
+        <result column="detail_address" jdbcType="VARCHAR" property="detailAddress"></result>
+        <result column="shopper_name" jdbcType="VARCHAR" property="shopperName"></result>
+        <result column="shopper_tel" jdbcType="VARCHAR" property="shopperTel"></result>
+        <result column="address_consignee" jdbcType="VARCHAR" property="addressConsignee"></result>
+        <result column="address_tel" jdbcType="VARCHAR" property="addressTel"></result>
+        <result column="order_date" jdbcType="VARCHAR" property="orderDate"></result>
+        <result column="order_price" jdbcType="DECIMAL" property="orderPrice"></result>
+        <result column="order_addressid" jdbcType="INTEGER" property="addressId"></result>
+        <result column="order_trackingNum" jdbcType="INTEGER" property="orderTrackingNum"></result>
+        <result column="order_trackingShopper" jdbcType="INTEGER" property="trackingShopper"></result>
+        <result column="order_hao" jdbcType="VARCHAR" property="orderHao"></result>
+        <result column="order_shopperId" jdbcType="INTEGER" property="shopperId"></result>
+    </resultMap>
+    <insert id="generateOrder">
+        insert into orders (user_id,good_id,order_status,good_Num,order_price,order_date,order_addressid,order_hao,order_shopperId)
+values (#{userId},#{goodId},#{orderStatus},#{goodNum},#{orderPrice},#{orderDate},#{addressId},#{orderHao},#{shopperId});
+    </insert>
+    <update id="FH">
+        update orders set order_status=1 , order_trackingNum=#{trackingNum},order_trackingShopper=#{trackingShopper} where order_id=#{orderId};
+    </update>
+    <update id="changeOrderStatus">
+        update orders set order_status=#{orderStatus} where order_hao=#{orderHao} and user_id=#{userId};
+    </update>
+    <delete id="deleteOrder">
+        delete from orders where order_hao=#{orderHao} and user_id=#{userId};
+    </delete>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,user_id,orders.good_id,good_name,order_hao,orders.good_Num,shopper_name,shopper_tel,order_date,order_status,order_trackingNum,order_trackingShopper
+        from shopper,orders,good
+        where good.shopper_id = shopper.shopper_id and orders.good_id=good.good_id
+        limit #{startNum},#{endNum};
+    </select>
+    <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,user_id,orders.good_id,good_name,order_hao,good_Num,shopper_name,shopper_tel,order_date
+        from shopper,orders,good
+        where  orders_id =#{orderId} good.shopper_id = shopper.shopper_id and orders.good_id=good.good_id;
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from orders;
+    </select>
+    <select id="selectByOrderAfterSH" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee,order_trackingNum,order_trackingShopper
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=2
+            limit #{startNum},#{endNum};
+    </select>
+    <select id="selectByOrderBeforeSH" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee,order_trackingShopper,order_trackingNum
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=1
+            limit #{startNum},#{endNum};
+    </select>
+    <select id="selectByOrderBeforeFH" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee,order_trackingShopper,order_trackingNum
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=0 limit 0,10;
+    </select>
+    <select id="selectByOrderAfterSHCount" resultType="java.lang.Integer">
+        select count(*) from orders where orders.order_status=2;
+    </select>
+    <select id="selectByOrderBeforeSHCount" resultType="java.lang.Integer">
+        select count(*) from orders where orders.order_status=1;
+    </select>
+    <select id="selectByOrderBeforeFHCount" resultType="java.lang.Integer">
+        select count(*) from orders where orders.order_status=0;
+    </select>
+    <select id="selectByOrderAfterSHByOrderId" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=2
+        and
+            order_id =#{orderId};
+    </select>
+    <select id="selectByOrderBeforeSHByOrderId" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=1
+          and
+            order_id =#{orderId};
+    </select>
+    <select id="selectByOrderBeforeFHByOrderId" resultMap="BaseResultMap" parameterType="integer">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=0
+          and
+            order_id =#{orderId};
+    </select>
+    <select id="selectByOrderBeforeSH1" resultMap="BaseResultMap">
+        select order_id,orders.user_id,orders.good_id,order_hao,good_name,orders.good_Num,province_name,city_name,district_name,detail_address,address_tel,order_date,address_consignee,order_trackingShopper,order_trackingNum
+        from user_receiving_address,orders,good
+        where orders.order_addressid = user_receiving_address.address_id and orders.good_id=good.good_id and orders.order_status=1 and shopper_id=#{shopperId} limit #{startNum},#{endNum};
+    </select>
+    <select id="getOrderHao" resultType="java.lang.String">
+        select distinct order_hao from  orders where order_status=#{orderStatus} and user_id=#{userId};
+    </select>
+    <select id="selectByOrderHao" resultType="java.lang.Integer">
+        select good_id from orders where order_hao=#{orderHao};
+    </select>
+    <select id="getAllOrderHao" resultType="java.lang.String">
+        select distinct order_hao from  orders where user_id=#{userId};
+    </select>
+    <select id="selectOrderStatusByOrderHao" resultType="integer">
+        select order_status from orders where order_hao=#{orderHao};
+    </select>
+    <select id="selectOrderByHaoAndGoodId" resultType="java.lang.Integer">
+        select good_Num from orders where order_hao=#{orderHao} and good_id=#{goodId};
+    </select>
+
+
+</mapper>

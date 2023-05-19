@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Message">
+        <result column="message_id" jdbcType="INTEGER" property="messageId"></result>
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="message_content" jdbcType="VARCHAR" property="messageContent"></result>
+        <result column="message_date" jdbcType="DATE" property="messageContent"></result>
+    </resultMap>
+    <select id="selectAllByDateDESC" resultMap="BaseResultMap" parameterType="integer">
+        select * FROM message order by message_id desc limit #{startNum},#{endNum};
+    </select>
+    <select id="selectAllByDateASC" resultMap="BaseResultMap">
+        select * FROM message order by message_id asc limit #{startNum},#{endNum};
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from message;
+    </select>
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Admin">
+        <result column="admin_id" jdbcType="INTEGER" property="adminId"></result>
+        <result column="admin_code" jdbcType="INTEGER" property="adminCode"></result>
+        <result column="admin_name" jdbcType="VARCHAR" property="adminName"></result>
+        <result column="admin_password" jdbcType="VARCHAR" property="adminPassword"></result>
+        <result column="admin_tel" jdbcType="VARCHAR" property="adminTel"></result>
+        <result column="admin_idcard" jdbcType="VARCHAR" property="adminIdcard"></result>
+        <result column="admin_sex" jdbcType="VARCHAR" property="adminSex"></result>
+        <result column="admin_address" jdbcType="VARCHAR" property="adminAddress"></result>
+    </resultMap>
+    <insert id="add" parameterType="com.pengling.beauty.entity.Admin">
+        insert into admin (admin_name,admin_idcard,admin_sex,admin_tel,admin_address)
+        values (#{adminName},#{adminIdcard},#{adminSex},#{adminTel},#{adminAddress});
+    </insert>
+    <update id="editByAdminId" parameterType="com.pengling.beauty.entity.Admin">
+       update admin set admin_tel = #{adminTel}
+                        where admin_id=#{adminId};
+    </update>
+    <update id="updateCode" >
+        update admin set admin_code=#{code} where admin_tel=#{adminTel} and admin_id=#{adminId};
+    </update>
+    <update id="updateDeleteCode">
+        update admin set admin_code=9999 where admin_tel=#{adminTel} and admin_id=#{adminId};
+    </update>
+    <delete id="deleteByAdminId" parameterType="int">
+        delete from admin where admin_id =#{id};
+    </delete>
+    <select id="login" resultMap="BaseResultMap" parameterType="com.pengling.beauty.entity.Admin" >
+        select * from admin where  admin_password=#{adminPassword} and
+        (admin_id=#{adminId} or admin_tel=#{adminId});
+    </select>
+    <select id="show"  resultMap="BaseResultMap" parameterType="int">
+        select * from admin limit #{startNum},#{endNum};
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from admin;
+    </select>
+    <select id="queryByAdminId" resultMap="BaseResultMap">
+        select * from admin where admin_id = #{id};
+    </select>
+    <select id="queryByAdminName" resultMap="BaseResultMap">
+        select * from admin where admin_name = #{adminName};
+    </select>
+</mapper>

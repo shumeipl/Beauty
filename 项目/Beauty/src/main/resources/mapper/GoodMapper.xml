@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.GoodMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Good">
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="shopper_id" jdbcType="INTEGER" property="shopperId"></result>
+        <result column="good_status" jdbcType="INTEGER" property="goodStatus"></result>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"></result>
+        <result column="good_price" jdbcType="DECIMAL" property="goodPrice"></result>
+        <result column="good_image1" jdbcType="VARCHAR" property="goodImg1"></result>
+        <result column="good_image2" jdbcType="VARCHAR" property="goodImg2"></result>
+        <result column="good_image3" jdbcType="VARCHAR" property="goodImg3"></result>
+        <result column="good_storage" jdbcType="INTEGER" property="goodStorage"></result>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"></result>
+        <result column="smallcategory_name" jdbcType="VARCHAR" property="smallCategoryName"></result>
+        <result column="good_detail" jdbcType="VARCHAR" property="goodDetail"></result>
+        <result column="material" jdbcType="VARCHAR" property="material"></result>
+        <result column="good_soldNum" jdbcType="INTEGER" property="goodSoldNum"></result>
+        <result column="good_video" jdbcType="VARCHAR" property="goodVideo"></result>
+        <result column="good_subgoodName" jdbcType="VARCHAR" property="goodSubGoodName"></result>
+        <result column="good_activeTitle" jdbcType="VARCHAR" property="goodActiveTitle"></result>
+        <result column="good_intro" jdbcType="VARCHAR" property="goodIntro"></result>
+        <result column="good_feature" jdbcType="VARCHAR" property="goodFeature"></result>
+        <result column="good_certificationNumber" jdbcType="VARCHAR" property="goodCertificationNumber"></result>
+    </resultMap>
+
+    <update id="acceptReadyGood" parameterType="integer">
+        update good set good_status=1 where good_id=#{goodId};
+    </update>
+    <update id="refuseReadyGood" parameterType="integer">
+        update good set good_status=2 where good_id=#{good_id};
+    </update>
+    <update id="refuseAlreadyGood" parameterType="integer">
+        update good set good_status=3 where good_id=#{good_id};
+    </update>
+    <delete id="deleteGoodByGoodId">
+        delete  from good where good_id=#{goodId};
+    </delete>
+    <select id="selectAllReadyGood" resultMap="BaseResultMap" parameterType="integer">
+        select good_id,shopper_id,good_name,good_price,good_image1
+        ,good_image2,good_image3,good_storage,good_soldNum,category_name,smallcategory_name,
+         good_detail,material,good_intro,good_certificationNumber
+         from good,category,smallcategory where good_status=0 and
+        good.category_id=category.category_id and  good.smallcategory_id =
+                                                   smallcategory.smallcategory_id
+                                                        limit #{startNum},#{endNum};
+    </select>
+    <select id="selectAllAlreadyGood" resultMap="BaseResultMap" parameterType="integer">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_certificationNumber,good_soldNum,
+               good_detail,material,good_intro from good,category,smallcategory
+                                    where good_status=1 and good.category_id=category.category_id and  good.smallcategory_id =
+                                                                            smallcategory.smallcategory_id
+                           limit #{startNum},#{endNum};
+    </select>
+    <select id="selectByIdAlreadyGood" resultMap="BaseResultMap" parameterType="integer">
+        select good_id,shopper_id,good_name,good_price,good_image1,good_certificationNumber
+                ,good_image2,good_soldNum,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_intro from good,category,smallcategory where good_status=1 and good.category_id=category.category_id and  good.smallcategory_id =
+                                                                                                                     smallcategory.smallcategory_id ;
+    </select>
+    <select id="countReadyGood" resultType="java.lang.Integer">
+        select count(*) from good where good_status=0;
+    </select>
+    <select id="countAlreadyGood" resultType="java.lang.Integer">
+        select count(*) from good where good_status=1;
+    </select>
+    <!--商家-->
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="integer">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_status,good_certificationNumber,
+               good_detail,good_soldNum,material,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                            smallcategory.smallcategory_id and shopper_id=#{shopperId}
+                         limit #{startNum},#{endNum};
+    </select>
+    <insert id="insert" parameterType="com.pengling.beauty.entity.Good">
+        insert into good (shopper_id,good_name,good_price,good_image1,good_image2,
+                          good_image3,good_storage,category_id,material,smallcategory_id,
+                          good_status,good_intro,good_certificationNumber,good_feature)
+values (#{shopperId},#{goodName},#{goodPrice},#{goodImg1},#{goodImg2},#{goodImg3},#{goodStorage},
+        (select category_id from category where category_name=#{categoryName}),#{material},
+           (select smallcategory_id from smallcategory,category where smallcategory_name=#{smallCategoryName}
+           and  category_name=#{categoryName} and smallcategory.category_id = category.category_id),0,
+        #{goodIntro},#{goodCertificationNumber},#{goodFeature});
+    </insert>
+    <insert id="addGoodSoldNum">
+        update good set good_soldNum=good_soldNum+#{num} where good_id=#{goodId};
+    </insert>
+    <insert id="addGoodStorage">
+        update good set good_storage=good_storage+#{num} where good_id=#{goodId};
+    </insert>
+    <update id="shangJiaGood" parameterType="integer">
+        update good set good_status=1 where good_id=#{good_id};
+    </update>
+    <update id="xiaJiaGood" parameterType="integer">
+        update good set good_status=3 where good_id=#{good_id};
+    </update>
+    <update id="updateDetail">
+        update good set good_detail=#{path} where good_id=#{goodId};
+    </update>
+    <update id="decrGoodStorage">
+        update good set good_storage=good_storage-#{num} where good_id=#{goodId};
+    </update>
+    <update id="decrGoodSoldNum">
+        update good set good_soldNum=good_soldNum-#{num} where good_id=#{goodId};
+    </update>
+    <update id="becomeSelected">
+        update good set good_selected=1 where good_id=#{goodId} ;
+    </update>
+    <select id="selectByIdGood" resultMap="BaseResultMap" parameterType="integer">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_certificationNumber,good_soldNum,
+               good_video,good_activeTitle,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                            smallcategory.smallcategory_id
+                                              and good_id=#{good_id};
+    </select>
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(*) from good;
+    </select>
+    <select id="selectId" resultType="java.lang.Integer">
+        select good_id from good where shopper_id = #{shopperId} and good_name=#{goodName} ;
+    </select>
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_certificationNumber,good_soldNum,
+        good_video,good_activeTitle,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =                                                                      smallcategory.smallcategory_id
+        and good.smallcategory_id=#{smallCategoryId} and good_status=1;
+    </select>
+    <select id="selectByGoodSelected" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_certificationNumber,good_soldNum,
+               good_video,good_activeTitle,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =                                                                      smallcategory.smallcategory_id
+                                                                                         and
+               good_selected=1 and good_status=1 limit #{PageNum},#{PageSize};
+    </select>
+    <select id="countSelectByGoodSelected" resultType="java.lang.Integer">
+        select count(*) from good where good_selected=1;
+    </select>
+    <select id="findGoodByFeature" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_certificationNumber,good_soldNum,
+               good_video,good_activeTitle,good_intro from good,category,smallcategory
+        where good.category_id=category.category_id and  good.smallcategory_id =                                                                      smallcategory.smallcategory_id
+          and
+            good_feature=#{feature} and good_status=1;
+    </select>
+    <select id="findGoodByName" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,
+               good_detail,material,good_certificationNumber,good_soldNum,
+               good_video,good_activeTitle,good_intro from good,category,smallcategory
+        where good.category_id=category.category_id and  good.smallcategory_id =                                                                      smallcategory.smallcategory_id
+           and good_status=1 and good_name like '%${goodName}%';
+    </select>
+    <select id="getMaterial" resultType="java.lang.String">
+        select material from good where good_id=#{goodId};
+    </select>
+    <select id="getHotSale" resultMap="BaseResultMap">
+        select good.good_id,good_image1 from orders,good where good.good_id=orders.good_id and order_date>=#{date} group by orders.good_id order by sum(good_Num) desc limit 0,5;
+    </select>
+    <select id="queryRoost" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_status,good_certificationNumber,
+               good_detail,good_soldNum,material,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                                                                                              smallcategory.smallcategory_id and shopper_id=#{shopperId} and good_status=1
+            limit #{startNum},#{endNum};
+    </select>
+    <select id="queryChecking" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_status,good_certificationNumber,
+               good_detail,good_soldNum,material,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                                                                                              smallcategory.smallcategory_id and shopper_id=#{shopperId} and good_status=0
+            limit #{startNum},#{endNum};
+    </select>
+    <select id="queryRefuse" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_status,good_certificationNumber,
+               good_detail,good_soldNum,material,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                                                                                              smallcategory.smallcategory_id and shopper_id=#{shopperId} and good_status=2
+            limit #{startNum},#{endNum};
+    </select>
+    <select id="selectAllSupplement" resultMap="BaseResultMap">
+        select good_id,shopper_id,good_name,good_price,good_image1
+                ,good_image2,good_image3,good_storage,category_name,smallcategory_name,good_status,good_certificationNumber,
+               good_detail,good_soldNum,material,good_intro from good,category,smallcategory where good.category_id=category.category_id and  good.smallcategory_id =
+                                                                                                                                              smallcategory.smallcategory_id and shopper_id=#{shopperId} and good_status=1 and good_storage=10
+            limit #{startNum},#{endNum};
+    </select>
+</mapper>

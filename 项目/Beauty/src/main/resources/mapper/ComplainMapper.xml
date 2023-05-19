@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.ComplainMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Complain">
+        <result column="complain_id" jdbcType="INTEGER" property="complainId"></result>
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"></result>
+        <result column="shopper_tel" jdbcType="VARCHAR" property="shopperTel"></result>
+        <result column="complain_content" jdbcType="VARCHAR" property="complainContent"></result>
+        <result column="complain_date" jdbcType="DATE" property="complainDate"></result>
+    </resultMap>
+    <insert id="insert">
+        insert into complain (good_id,user_id,complain_content,complain_date)
+values (#{goodId},#{userId},#{complainContent},#{complainDate});
+    </insert>
+    <select id="selectAllComplainDESC" resultMap="BaseResultMap" parameterType="integer">
+        select complain_id,complain.good_id,good_name,shopper_tel,complain_content,complain_date
+        from complain,shopper,good where good.good_id=complain.good_id
+and
+                                       good.shopper_id=shopper.shopper_id
+order by complain_id desc limit #{startNum},#{endNum};
+    </select>
+    <select id="selectByGoodId" resultMap="BaseResultMap">
+        select complain_id,complain.good_id,good_name,shopper_tel,complain_content,complain_date
+        from complain,shopper,good where good.good_id=complain.good_id
+                                     and
+            good.shopper_id=shopper.shopper_id and complain.good_id = #{goodId}
+order by complain_id asc limit #{startNum},#{endNum} ;
+    </select>
+    <select id="selectByGoodName" resultMap="BaseResultMap">
+        select complain_id,complain.good_id,good_name,shopper_tel,complain_content,complain_date
+        from complain,shopper,good where good.good_id=complain.good_id
+                                     and
+            good.shopper_id=shopper.shopper_id and good.good_name = '%'+#{goodName}+'%'
+        order by complain_id asc limit #{startNum},#{endNum} ;
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from complain;
+    </select>
+    <select id="selectByGoodIdCount" resultType="java.lang.Integer" parameterType="integer">
+        select count(*) from complain,shopper,good where good.good_id=complain.good_id
+                                                     and
+            good.shopper_id=shopper.shopper_id and complain.good_id = #{goodId};
+    </select>
+    <select id="selectByGoodNameCount" resultType="java.lang.Integer" parameterType="string">
+        select count(*) from complain,shopper,good where good.good_id=complain.good_id
+                                     and
+            good.shopper_id=shopper.shopper_id and good.good_Name = '%'+#{goodName}+'%';
+    </select>
+</mapper>

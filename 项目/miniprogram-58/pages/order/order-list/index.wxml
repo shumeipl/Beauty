@@ -1,0 +1,113 @@
+<view class="page-container">
+  <view class="tab-bar">
+    <view class="tab-bar__placeholder" />
+    <t-tabs
+      t-class="tab-bar__inner"
+      t-class-active="tab-bar__active"
+      t-class-track="t-tabs-track"
+      bind:change="onTabChange"
+      value="{{status}}"
+      style="position: fixed; top: 0; left: 0; z-index: 100"
+    >
+      <t-tab-panel
+        wx:for="{{tabs}}"
+        wx:for-index="index"
+        wx:for-item="item"
+        wx:key="index"
+        label="{{item.text}}"
+        value="{{item.key}}"
+      />
+    </t-tabs>
+  </view>
+  <t-pull-down-refresh
+    id="pull-down-refresh"
+    normal-bar-height="{{200}}"
+    max-bar-height="{{272}}"
+    refreshTimeout="{{3000}}"
+    background="#f5f5f5"
+    use-loading-slot
+    loading-size="60rpx"
+    bindrefresh="onPullDownRefresh_"
+    t-class-indicator="t-class-indicator"
+  >
+    <order-card
+      wx:for="{{orderList}}"
+      wx:key="id"
+      wx:for-item="order"
+      wx:for-index="oIndex"
+      order="{{order}}"
+      defaultShowNum="{{0}}"
+      data-order="{{order}}"
+      useLogoSlot
+    >
+    <!-- orderList是整个订单
+    order 是订单子项
+    order的goods是
+     -->
+      <view slot="top-left" class="order-number">
+        <text decode>订单号&nbsp;</text>
+        {{order.orderHao}}
+      </view>
+      <specs-goods-card
+        data="{{order.goodInfo}}"
+        no-top-line="{{gIndex === 0}}"
+      />
+      <view slot="more">
+        <view class="price-total">
+          <text>总价</text>
+          <price fill price="{{order.orderPrice*100 + ''}}" />
+          <text>，运费</text>
+         <text>免运费</text>
+          <text decode>&nbsp;</text>
+          <text class="bold-price" decode="{{true}}">实付&nbsp;</text>
+          <price fill class="real-pay" price="{{order.orderPrice*100 + ''}}" decimalSmaller />
+        </view>
+        <!-- 订单按钮栏 -->
+       <view wx:if="{{order.orderStatus==0}}" style="display: flex;margin-top: 18rpx;" >
+       <view class="cancel-order" bindtap="cancelOrder" data-orderHao="{{order.orderHao}}">取消订单</view>
+       <view class="re-order" bindtap="reOrder" data-orderHao="{{order.orderHao}}">再次购买</view>
+       </view>
+       <view wx:if="{{order.orderStatus==1}}">
+       <view style="display: flex;">
+       <view style="font-size: small; color: gray;">{{order.orderTrackingShopper}}</view>
+       <view style="font-size: small;margin-left: 10rpx; color: gray;">{{order.orderTrackingNum}}</view>
+      </view>
+       <view class="ack" bindtap="ack" data-orderHao="{{order.orderHao}}" >确认收货</view>
+       </view>
+       <view wx:if="{{order.orderStatus==2}}" style="display: flex;margin-top: 18rpx;">
+        <!-- <view class="cancel-order" bindtap="aferShop">申请售后</view> -->
+       <view class="ack" bindtap="comment" data-orderHao="{{order.orderHao}}" >评价</view>
+       </view>
+       <view wx:if="{{order.orderStatus==3}}" >
+       <view class="SY" wx:if="{{flag}}">
+       <view>剩余</view>
+       <view style="margin-left: 10rpx;">{{order.SYhour}}：</view>
+       <view>{{order.SYmin}}：</view>
+       <view>{{order.SYsecond}}</view>
+       </view>
+       <view style="display: flex;margin-top: 18rpx;">
+        <view class="cancel-order" data-orderHao="{{order.orderHao}}" bindtap="cancelOrder">取消订单</view>
+       <view class="re-order" data-orderHao="{{order.orderHao}}"  bindtap="toPay">去支付</view>
+       </view>
+       </view>
+       <view wx:if="{{order.orderStatus==4}}" style="display: flex;margin-top: 18rpx;">
+        <view class="ack" bindtap="reOrder" data-orderHao="{{order.orderHao}}">再次购买</view>
+       </view>
+      </view>
+    </order-card>
+    <!-- 列表加载中/已全部加载 -->
+    <load-more
+      wx:if="{{!pullDownRefreshing}}"
+      list-is-empty="{{!orderList.length}}"
+      status="{{listLoading}}"
+      bindretry="onReTryLoad"
+    >
+      <!-- 空态 -->
+      <view slot="empty" class="empty-wrapper">
+        <t-empty t-class="t-empty-text" src="{{emptyImg}}">暂无相关订单</t-empty>
+      </view>
+    </load-more>
+  </t-pull-down-refresh>
+</view>
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

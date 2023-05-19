@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Comment">
+        <result column="comment_id" jdbcType="INTEGER" property="commentId"></result>
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="shopper_id" jdbcType="INTEGER" property="shopperId"></result>
+        <result column="comment_content" jdbcType="VARCHAR" property="commentContent"></result>
+        <result column="comment_level" jdbcType="INTEGER" property="commentLevel"></result>
+        <result column="comment_status" jdbcType="INTEGER" property="commentStatus"></result>
+        <result column="comment_reply" jdbcType="VARCHAR" property="commentReply"></result>
+        <result column="comment_date" jdbcType="VARCHAR" property="commentDate"></result>
+        <result column="comment_way" jdbcType="INTEGER" property="commentWay"></result>
+        <result column="user_nickname" jdbcType="VARCHAR" property="userName"></result>
+        <result column="user_avatar" jdbcType="VARCHAR" property="userAvatar"></result>
+    </resultMap>
+    <update id="reply" parameterType="String">
+        update comment set comment_reply = #{reply};
+    </update>
+    <insert id="generateComment">
+        insert into comment (user_id,good_id,comment_level,comment_content,comment_status,order_hao,
+        comment_way,comment_date) values (#{userId},#{goodId},#{commentLevel},#{commentContent},#{commentStatus},
+        #{orderHao},#{commentWay},#{commentDate});
+    </insert>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select comment_id,user_id,comment.good_id,good.shopper_id,comment_content,comment_level,comment_status,
+               comment_reply,comment_date from good,comment where comment.good_id=good.good_id
+               limit #{startNum},#{endNum};
+    </select>
+    <select id="selectAllByShopperId" resultMap="BaseResultMap">
+        select comment_id,user_id,comment.good_id,good.shopper_id,comment_content,comment_level,comment_status,
+               comment_reply,comment_date from good,comment where comment.good_id=good.good_id and
+               good.shopper_id=#{shopperId} limit #{startNum},#{endNum};;
+    </select>
+    <select id="selectCommentByGoodId" resultMap="BaseResultMap">
+        select comment_id,user_id,comment.good_id,good.shopper_id,comment_content,comment_level,comment_status,
+               comment_reply,comment_date from good,comment where comment.good_id=#{goodId} and comment.good_id=good.good_id ;
+    </select>
+    <select id="selectCommentByGoodIdAndShopperId" resultMap="BaseResultMap">
+        select comment_id,user_id,comment.good_id,good.shopper_id,comment_content,comment_level,comment_status,
+               comment_reply,comment_date from good,comment where comment.good_id=#{goodId} and comment.good_id=good.good_id
+and good.shopper_id= #{shopperId};
+    </select>
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        select  count(*) from comment;
+    </select>
+    <select id="selectAllShopperIdCount" resultType="java.lang.Integer">
+        select count(*) from good,comment where comment.good_id=good.good_id
+and good.shopper_id = #{shopperId};
+    </select>
+    <select id="getAllComment" resultMap="BaseResultMap">
+        select user_nickname,user_avatar,comment_content,comment_level,comment_date from comment,user where good_id=#{goodId} and comment.user_id=user.user_id;
+    </select>
+    <select id="getNewestComment" resultMap="BaseResultMap">
+        select  user_nickname,user_avatar,comment_content,comment_level,comment_date from comment,user where good_id=#{goodId} and comment.user_id=user.user_id order by comment_date desc limit 0,1;
+    </select>
+    <select id="getGreatComment" resultMap="BaseResultMap">
+        select  user_nickname,user_avatar,comment_content,comment_level,comment_date from comment,user where good_id=#{goodId} and comment.user_id=user.user_id and comment_level>=4;
+    </select>
+    <select id="getMiddleComment" resultMap="BaseResultMap">
+        select  user_nickname,user_avatar,comment_content,comment_level,comment_date from comment,user where good_id=#{goodId} and comment.user_id=user.user_id and 4>comment_level and comment_level>=2 ;
+    </select>
+    <select id="getBadComment" resultMap="BaseResultMap">
+        select  user_nickname,user_avatar,comment_content,comment_level,comment_date from comment,user where good_id=#{goodId} and comment.user_id=user.user_id and 2>comment_level ;
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from comment where good_id=#{goodId};
+    </select>
+    <select id="getGreatCount" resultType="java.lang.Integer">
+        select count(*) from comment where good_id=#{goodId} and comment_level>3;
+    </select>
+    <select id="getMiddleCount" resultType="java.lang.Integer">
+        select count(*) from comment where good_id=#{goodId} and 3>=comment_level and comment_level>=2 ;
+    </select>
+    <select id="getBadCount" resultType="java.lang.Integer">
+        select count(*) from comment where good_id=#{goodId} and 2>comment_level;
+    </select>
+    <select id="getCommentByShopperId" resultMap="BaseResultMap">
+        select comment.* from comment,good where comment.good_id=good.good_id and  good.shopper_id=#{shopperId} limit #{startNum},#{endNum};
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from comment,good where comment.good_id=good.good_id and  good.shopper_id=#{shopperId};
+    </select>
+</mapper>

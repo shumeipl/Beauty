@@ -1,0 +1,37 @@
+<!--pages/cooperation/cooperation.wxml-->
+<view class="box" wx:if="{{userId!=null}}">
+<view>
+<view class="text">您的姓名</view>
+<input name="name" placeholder="输入姓名..." bindinput="changeName" />
+</view>
+
+<view>
+<view class="text">公司</view>
+<input name="company" placeholder="输入公司..." bindinput="changeCompany"/>
+</view>
+
+<view>
+<view class="text">所在部门</view>
+<input name="duty" placeholder="输入部门..." bindinput="changeDepartment" />
+</view>
+
+<view>
+<view class="text">所在职位</view>
+<input name="duty" placeholder="输入职位..." bindinput="changeDuty" />
+</view>
+
+<view>
+<view class="text">公司地址</view>
+<input name="companyAddress" placeholder="输入公司地址..." bindinput="changeAddress" />
+</view>
+
+<view>
+<view class="text">电话</view>
+<input name="tel" placeholder="输入电话..." bindinput="changeTel"/>
+</view>
+
+<button type="primary" style="margin-top: 20rpx;" bindtap="submit">提交</button>
+</view>
+<view wx:if="{{userId==null}}">
+<view class="please" bindtap="gotoLogin">登录</view>
+</view>

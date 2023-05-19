@@ -1,0 +1,14 @@
+<view class="box">
+<view class="first">
+<image src="/images/成功.png" class="icon"></image>
+<view class="first-text">支付成功</view>
+</view>
+<view class="second">
+<view style="color: gray;">微信支付：</view>
+<view class="second-price" >￥{{price}}</view>
+</view>
+<view class="third">
+<view class="third-button01" bindtap="checkOrder">查看订单</view>
+<view class="third-button02" bindtap="backHome">返回首页</view>
+</view>
+</view>

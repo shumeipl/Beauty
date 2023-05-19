@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.SubGoodMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.SubGood">
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="sub_id" jdbcType="INTEGER" property="subId"></result>
+        <result column="sub_name" jdbcType="VARCHAR" property="subName"></result>
+        <result column="sub_image" jdbcType="VARCHAR" property="subImage"></result>
+        <result column="sub_price" jdbcType="DECIMAL" property="subPrice"></result>
+        <result column="sub_storage" jdbcType="INTEGER" property="subStorage"></result>
+        <result column="sub_soldNum" jdbcType="INTEGER" property="subSoldNum"></result>
+    </resultMap>
+    <insert id="insertSubGoodAdd" parameterType="com.pengling.beauty.entity.SubGood">
+        insert into subgood (good_id,sub_name,sub_image,sub_price,sub_storage) values
+          (#{goodId},#{subName},#{subImage},#{subPrice},#{subPrice});
+    </insert>
+
+
+</mapper>

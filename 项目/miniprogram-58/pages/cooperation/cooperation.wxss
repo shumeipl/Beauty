@@ -1,0 +1,22 @@
+.text{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-weight: 550;
+  margin-top: 20rpx;
+}
+input{
+  border: 1px solid gainsboro;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.please{
+  border: 1rpx solid orangered;
+  color: orangered;
+  width: 100rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+}

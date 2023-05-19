@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.CooperationMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Cooperation">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="name" jdbcType="VARCHAR" property="name"></result>
+        <result column="idcard" jdbcType="VARCHAR" property="idcard"></result>
+        <result column="company" jdbcType="VARCHAR" property="company"></result>
+        <result column="duty" jdbcType="VARCHAR" property="duty"></result>
+        <result column="phone" jdbcType="INTEGER" property="phone"></result>
+        <result column="address" jdbcType="VARCHAR" property="address"></result>
+        <result column="date" jdbcType="VARCHAR" property="date"></result>
+        <result column="department" jdbcType="VARCHAR" property="department"></result>
+        <result column="company_address" jdbcType="VARCHAR" property="companyAddress"></result>
+    </resultMap>
+    <insert id="insertAll" parameterType="com.pengling.beauty.entity.Cooperation">
+        insert into cooperation (user_id,name,idcard,company,duty,phone,address,date,company_address
+        ,status)
+        values (#{userId},#{name},#{idcard},#{company},#{duty},#{phone},#{address},#{date},#{companyAddress},0);
+    </insert>
+    <insert id="accept" parameterType="com.pengling.beauty.entity.Cooperation">
+        insert into shopper (shopper_name,shopper_tel,shopper_password,shopper_address) values (#{company},#{phone},#{phone},#{address});
+    </insert>
+    <insert id="insert">
+        insert into cooperation(user_id,name,company,department,duty,company_address,phone,date,status)
+values(#{userId},#{name},#{company},#{department},#{duty},#{companyAddress},#{phone},#{date},0);
+    </insert>
+    <update id="refuse" parameterType="integer">
+        update cooperation set status=2 where id=#{cooperationId};
+    </update>
+    <delete id="delete">delete from cooperation where id=#{cooperationId}</delete>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="integer">
+        select * from cooperation limit #{startNum},#{endNum};
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from cooperation;
+    </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from cooperation where id=#{id};
+    </select>
+
+
+</mapper>

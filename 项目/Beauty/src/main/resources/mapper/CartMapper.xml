@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.CartMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Cart">
+        <result column="good_id" jdbcType="INTEGER" property="goodId"></result>
+        <result column="shopper_id" jdbcType="INTEGER" property="shopperId"></result>
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="good_num" jdbcType="INTEGER" property="goodNum"></result>
+        <result column="cart_date" jdbcType="DATE" property="cartDate"></result>
+        <result column="selected" jdbcType="INTEGER" property="selected"></result>
+        <result column="allSelected" jdbcType="INTEGER" property="allSelected"></result>
+
+    </resultMap>
+    <insert id="addGoodToCart">
+        insert into cart (user_id,good_id,good_num,cart_date,selected,shopper_id,allSelected)
+values (#{userId},#{goodId},#{goodNum},#{cartDate},#{selected},#{shopperId},#{allSelected});
+    </insert>
+    <update id="addGoodNum">
+        update cart set good_num=good_num+#{goodNum},cart_date=#{date} where user_id=#{userId} and good_id=#{goodId};
+    </update>
+    <update id="descGoodNum">
+        update cart set good_num=good_num-1 where user_id=#{userId} and good_id=#{goodId};
+    </update>
+    <update id="updateGoodNum">
+        update cart set good_num=#{goodNum} where user_id=#{userId} and good_id=#{goodId};
+    </update>
+    <update id="updateCart">
+        update cart set allSelected=#{allSelected},selected=#{selected},good_num=#{goodNum},cart_date=#{date}
+where user_id=#{userId} and good_id=#{goodId};
+    </update>
+    <delete id="deleteGoodNum">
+        delete from cart  where user_id=#{userId} and good_id=#{goodId};
+    </delete>
+    <select id="selectCartHasGood" resultMap="BaseResultMap">
+        select * from cart where user_id=#{userId} and good_id=#{goodId};
+    </select>
+
+</mapper>

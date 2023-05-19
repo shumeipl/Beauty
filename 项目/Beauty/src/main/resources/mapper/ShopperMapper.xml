@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.ShopperMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Shopper">
+        <result column="shopper_id" jdbcType="INTEGER" property="shopperId"></result>
+        <result column="shopper_code" jdbcType="INTEGER" property="shopperCode"></result>
+        <result column="shopper_avatar" jdbcType="VARCHAR" property="shopperAvatar"></result>
+        <result column="shopper_name" jdbcType="VARCHAR" property="shopperName"></result>
+        <result column="shopper_tel" jdbcType="VARCHAR" property="shopperTel"></result>
+        <result column="shopper_password" jdbcType="VARCHAR" property="shopperPassword"></result>
+        <result column="shopper_idcard" jdbcType="VARCHAR" property="shopperIdCard"></result>
+        <result column="shopper_address" jdbcType="VARCHAR" property="shopperAddress"></result>
+        <result column="shopper_describe" jdbcType="VARCHAR" property="shopperDescribe"></result>
+        <result column="shopper_regist_date" jdbcType="DATE" property="shopperRegistDate"></result>
+    </resultMap>
+    <select id="ShopperCount" resultType="int">
+        select count(*) from shopper;
+    </select>
+    <delete id="deleteByShopperOpenid" parameterType="integer" >
+        delete from shopper where shopper_id=#{id};
+    </delete>
+    <select id="login" resultMap="BaseResultMap" parameterType="com.pengling.beauty.entity.Shopper" >
+        select * from shopper where  shopper_password=#{shopperPassword} and
+         shopper_tel=#{shopperTel};
+    </select>
+    <select id="queryAllShoppersByASC" resultMap="BaseResultMap">
+    select * from shopper  order by shopper_id asc limit #{startNum},#{endNum};
+    </select>
+    <select id="queryAllShoppersByDESC" resultMap="BaseResultMap">
+        select * from shopper order by shopper_id desc limit #{startNum},#{endNum} ;
+    </select>
+<!--    查询某一个人-->
+    <select id="queryAllByShopperOpenidShoppers" resultMap="BaseResultMap" parameterType="integer">
+        select * from shopper where shopper_id=#{id};
+    </select>
+    <select id="queryAllByShopperNameShoppers" resultMap="BaseResultMap">
+        select * from shopper where shopper_name=#{name};
+    </select>
+    <select id="findShopperName" resultType="java.lang.String">
+        select shopper_name from shopper where shopper_id=#{shopperId};
+    </select>
+    <!--    商家管理 修改，新增  -->
+    <insert id="insertShopperById" parameterType="com.pengling.beauty.entity.Shopper">
+        insert into shopper (shopper_avatar,shopper_name,shopper_tel,
+                             shopper_password,shopper_idcard,shopper_address,shopper_describe
+                             ,shopper_regist_date) values (#{shopperAvatar},#{shopperName}
+                             ,#{shopperTel},#{shopperPassword},#{shopperIdCard},#{shopperAddress},
+                                                           #{shopperDescribe},#{shopperRegistDate});
+    </insert>
+    <update id="updateShopperById">
+        update  shopper set shopper_id=#{shopperId},shopper_avatar=#{shopperAvatar},shopper_name=#{shopperName},
+                            shopper_tel=#{shopperTel},shopper_address=#{shopperAddress},shopper_describe=
+                                #{shopperDescribe} where shopper_id =#{shopperId};
+    </update>
+    <update id="updateShopperPasswordById" parameterType="com.pengling.beauty.entity.Shopper" >
+        update shopper set shopper_password=#{shopperPassword} where shopper_id=#{shopperId};
+    </update>
+    <update id="updateCode" parameterType="integer">
+        update shopper set shopper_code=#{code} where shopper_tel=#{shopperTel} and shopper_id=#{shopperId};
+    </update>
+    <update id="updateDeleteCode" parameterType="integer">
+        update shopper set shopper_code="" where shopper_tel=#{shopperTel} and shopper_id=#{shopperId};
+    </update>
+</mapper>

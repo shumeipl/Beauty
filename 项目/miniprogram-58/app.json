@@ -1,0 +1,77 @@
+{
+  "pages":[
+    "pages/usercenter/usercenter",
+    "pages/pay-success/indes",
+    "pages/usercenter/phone-bind/phone-bind",
+    "pages/usercenter/phone-bind/phone-identify/phone-identify",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/bangdan/bangdan",
+    "pages/goods/comments/index",
+    "pages/goods/comments/create/index",
+    "pages/usercenter/person-info/index",
+    "pages/usercenter/name-edit/index",
+    "pages/home/home",
+    "pages/cart/cart",
+    "pages/goods/category/index",
+    "pages/goods/list/index",
+    "pages/goods/details/index",
+    "pages/cooperation/cooperation",
+    "pages/order/delivery-detail/index",
+    "pages/order/fill-tracking-no/index",
+    "pages/order/invoice/index",
+    "pages/order-confirm/index",
+    "pages/order/order-detail/index",
+    "pages/order/order-list/index",
+    "pages/order/receipt/index",
+    "pages/usercenter/address/list/index",
+    "pages/usercenter/address/edit/index",
+    "pages/order/apply-service/index",
+    "pages/goods/search/index",
+    "pages/goods/result/index",
+    "pages/order/shohou/shouhou"
+  ],
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#FF5F15",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/首页.png",
+        "selectedIconPath": "/images/首页 (1).png"
+      },
+      {
+        "current": 1,
+        "pagePath": "pages/goods/category/index",
+        "text": "分类",
+        "iconPath": "/images/分类.png",
+        "selectedIconPath": "/images/分类 (1).png"
+      },
+      {
+        "current": 2,
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "/images/购物车.png",
+        "selectedIconPath": "/images/购物车 (1).png"
+      },
+      {
+        "current": 3,
+        "pagePath": "pages/usercenter/usercenter",
+        "text": "个人中心",
+        "iconPath": "/images/个人中心.png",
+        "selectedIconPath": "/images/个人中心 (1).png"
+      }
+    ]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

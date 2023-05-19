@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: whitesmoke;
+}
+.header{
+    background-color: #12192c;
+    display: flex;
+    color: seashell;
+    height: 60px;
+    align-items: center;
+}
+.header-firstText,.header-thirdText{
+    font-weight: 550;
+    margin-left: 15px;
+}
+.header-secondText{
+    margin-left: 10px;
+}
+.center{
+    background-color: whitesmoke;
+    width: inherit;
+    height: 80px;
+}
+.center{
+    display: flex;
+}
+.center-first{
+    background-color:#6495ed;
+    padding: 2px;;
+    width: 70px;
+    font-size: small;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    color: white;
+    margin-top: 40px;
+    margin-left: 15px;
+}
+.center-first:hover{
+    background-color: blue;
+}
+input{
+    outline: none;
+    height: 25px;
+}
+.center-second{
+    display: flex;
+    height: 30px;
+    margin-top:40px;
+    margin-left: 800px;
+}
+.center-second-second{
+    background-color: blue;
+    width: 40px;
+    height: 30px;
+    margin-left: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: small;
+}
+table{
+    margin-left: 15px;
+    margin: 10px auto;
+    background-color: white;
+    border: 1px solid gainsboro;
+}
+.content-table-class01{
+    width: 100px;
+    text-align: left;
+    font-weight: 500;
+    font-size: small;
+    height: 30px;
+    line-height:30px ;
+    background-color: white;
+    color: gray;
+    padding: 5px;
+
+}
+.content-table-class02{
+    width: 300px;
+    background-color: white;
+    text-align: left;
+    font-weight: 500;
+    font-size: small;
+    height: 30px;
+    line-height:30px ;
+    color: gray;
+}
+td{
+    font-size: small;
+    padding: 6px;
+}
+tbody>tr:nth-child(even){
+    background-color: whitesmoke;
+}
+tbody>tr:nth-child(odd){
+    background-color: white;
+}
+tbody>tr:hover{
+    background-color: #EAF2D3;
+}
+.content-table-edit{
+    border: 1px solid whitesmoke;
+    background-color: white;
+    width: 50px;
+    border-radius: 10%;
+}
+.content-table-edit:hover{
+    border: 1px solid whitesmoke;
+    background-color: blue;
+    color: white;
+    width: 50px;
+    border-radius: 10%;
+}
+.content-table-delete{
+    border: 1px solid #D24D57;
+    background-color: #D24D57;
+    width: 50px;
+}

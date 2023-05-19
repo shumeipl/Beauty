@@ -1,0 +1,192 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    background-color: #12192c;
+    display: flex;
+    color: seashell;
+    height: 60px;
+    align-items: center;
+}
+.header-firstText,.header-thirdText{
+    font-weight: 550;
+    margin-left: 15px;
+}
+.header-secondText{
+    margin-left: 10px;
+}
+.eject{
+    position: fixed;
+    width: 350px;
+    height: 300px;
+    top: 20%;
+    left: 38%;
+    background-color: white;
+    border: 1px solid gainsboro;
+    display: none;
+}
+.eject01{
+    position: fixed;
+    width: 350px;
+    height: 300px;
+    top: 20%;
+    left: 38%;
+    background-color: white;
+    border: 1px solid gainsboro;
+    display: none;
+}
+.eject03{
+    position: fixed;
+    width: 350px;
+    height: 300px;
+    top: 20%;
+    left: 38%;
+    background-color: white;
+    border: 1px solid gainsboro;
+    display: none;
+}
+.eject04{
+    position: fixed;
+    width: 350px;
+    height: 300px;
+    top: 20%;
+    left: 38%;
+    background-color: white;
+    border: 1px solid gainsboro;
+    display: none;
+}
+.center{
+    border-radius: 10px;
+    height: 296px;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.center-avatar{
+    border: whitesmoke solid 1px;
+    border-radius: 50%;
+    height: 110px;
+    width: 110px;
+    margin: 0 auto;
+}
+.outer-name{
+    display: flex;
+}
+.name{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    width: 50px;
+    border-bottom: darkgray 1px solid;
+    margin:0 auto;
+}
+.center-account,.center-phoneNumber{
+    font-size: large;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-left: 3px;
+}
+.footer-a{
+    width: 70px;
+    margin-left:5px;
+    text-decoration: none;
+    color: #000;
+    margin-top: 10px;
+    font-size: small;
+}
+.center-a{
+    width: 70px;
+    margin-left:5px;
+    text-decoration: none;
+    color: #000;
+    margin-top: 25px;
+    font-size: small;
+}
+.footer-a:hover{
+    color: blue;
+}
+.center-a:hover{
+    color: blue;
+}
+.icon{
+    height: 25px;
+    width: 25px;
+    justify-content: center;
+    margin-left: 250px;
+    margin-top: 20px;
+}
+.footer-icon{
+    height: 25px;
+    width: 25px;
+    justify-content: center;
+}
+.footer{
+    width: 400px;
+    height: 30px;
+    margin:0 auto;
+    display: flex;
+}
+.eject-first{
+    width: 330px;
+    height: 250px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+.eject-button{
+    background-color: #00CCFF;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+}
+.eject-second{
+    height: 30px;
+    display:flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+.eject-second01{
+    height: 30px;
+    margin-top: 30px;
+    justify-content: center;
+}
+.eject-third{
+    display: flex;
+    justify-content: center;
+    font-size: small;
+    margin-top: 30px;
+}
+input{
+    height: 30px;
+    width: 200px;
+}
+
+.eject-fourth{
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 35px;
+    align-items: center;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    background-color: #00CCFF;
+}
+.eject-fourth01{
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 90px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-weight: bold;
+    color: aliceblue;
+    background-color: #00CCFF;
+}

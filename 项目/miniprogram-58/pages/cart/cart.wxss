@@ -1,0 +1,169 @@
+.cart-empty {
+  padding: 64rpx 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  height: calc(100vh - 100rpx);
+  background-color: #f5f5f5;
+}
+.cart-empty .cart-img {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 24rpx;
+}
+
+.cart-empty .tip {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #999;
+  margin-bottom: 24rpx;
+}
+.cart-empty .btn {
+  width: 240rpx;
+  height: 72rpx;
+  border-radius: 36rpx;
+  text-align: center;
+  line-height: 72rpx;
+  border: 2rpx solid #fa4126;
+  color: #fa4126;
+  background-color: transparent;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.shopper-image{
+  width: 25px;
+  height: 25px;
+  margin-left:35rpx ;
+}
+.shopper-name{
+  font-weight: 600;
+  margin-left: 10px;
+}
+.shopperInfo-wrap{
+  display: flex;
+}
+.good-wrap{
+  display: flex;
+  width: 100%;
+  height: 96px;
+  margin-top: 15rpx;
+}
+.group-card {
+  display: flex;
+  width: 120%;
+  height: 96px;
+  margin-top: 10rpx;
+}
+.good-card-active{
+  display: flex;
+  width: 120%;
+  margin-top: 20rpx;
+  height: 96px;
+  transform: translate(-15%,0);
+}
+.good-card{
+  display: flex;
+  height: 96px;
+  width: 120%;
+  margin-top: 20rpx;
+}
+.image{
+  width: 180rpx;
+  height: 185rpx;
+  margin-top: 3px;
+  border-radius: 10rpx;
+}
+.shopper-icon{
+  padding: 28rpx 32rpx 28rpx 0rpx;
+}
+.box{
+  margin-left: 15px;
+  display: flex;
+}
+.del{
+  height: 96px;
+  margin-top: 10rpx;
+  width:20%;
+  background-color: #fa4126;
+  font-size: 28rpx;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.good-num-operation{
+  display: flex;
+  margin-left: 230rpx;
+  width: 200rpx;
+  margin-top: 55rpx;
+}
+.good-price{
+  color: #fa4126;
+  margin-left: -430rpx;
+  margin-top: 65rpx;
+  display: flex;
+}
+.desc,.add{
+  background-color:whitesmoke;
+  border-radius: 3rpx;
+  height: 50rpx;
+  width: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.good-num{
+  height: 50rpx;
+  width: 80rpx;
+  vertical-align:middle;
+  background-color:whitesmoke;
+  border-radius: 3rpx;
+  margin-left: 3px;
+  text-align: center;
+  font-size: small;
+}
+.add{
+  margin-left: 3px;
+}
+.good-name{
+  height: 80rpx;
+}
+.jieSuan{
+  border-top: 1px solid silver;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 125rpx;
+  top: 981rpx;
+  align-items: center;
+}
+.quanxuan-icon{
+  margin-left: 25rpx;
+}
+.quanxuan-text{
+  margin-left: 15rpx;
+}
+.zongjiage{
+  width: 150rpx;
+  color: #fa4126;
+  font-size: large;
+  margin-left: 250rpx;
+  line-height: 100%;
+  display: flex;
+}
+.jiesuan-button{
+  width: 180rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: orangered;
+  color: white;
+  font-weight: 540;
+  margin-left: 10rpx;
+}
+.goods{
+  width: 750rpx;
+}

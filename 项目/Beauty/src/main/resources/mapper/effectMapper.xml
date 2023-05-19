@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.effectMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.effect">
+        <result column="effect_name" jdbcType="INTEGER" property="effectName"></result>
+    </resultMap>
+    <select id="getAllEffect" resultMap="BaseResultMap">
+        select * from effect;
+    </select>
+
+</mapper>

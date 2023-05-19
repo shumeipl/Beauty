@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.User">
+        <result column="user_id" jdbcType="INTEGER" property="userId"></result>
+        <result column="user_points" jdbcType="INTEGER" property="userPoints"></result>
+        <result column="user_nickname" jdbcType="VARCHAR" property="userNickname"></result>
+        <result column="user_gender" jdbcType="VARCHAR" property="userGender"></result>
+        <result column="user_age" jdbcType="VARCHAR" property="userAge"></result>
+        <result column="user_openid" jdbcType="VARCHAR" property="userOpenId"></result>
+        <result column="user_tel" jdbcType="VARCHAR" property="userTel"></result>
+        <result column="user_avatar" jdbcType="VARCHAR" property="userAvatar"></result>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"></result>
+        <result column="user_registerDate" jdbcType="DATE" property="userDate"></result>
+     </resultMap>
+    <insert id="addUser">
+        insert into user(user_nickname,user_avatar,user_openid,user_gender) values
+     (#{userNickname},#{userAvatar},#{userOpenId},#{userGender})
+    </insert>
+    <update id="addPoint">
+        update user set user_points=user_points+10,last_points_date=#{date} where user_id=#{userId};
+    </update>
+    <update id="ChangeUserNickName">
+        update user set user_nickname=#{nickName} where user_id=#{userId};
+    </update>
+    <update id="changeUserGender">
+        update user set user_gender=#{gender} where user_id=#{userId};
+    </update>
+    <update id="changeUserCode">
+        update user set user_code=#{userCode} where user_id=#{userId};
+    </update>
+    <update id="updateTel">
+        update user set user_tel=#{tel} where user_id=#{userId};
+    </update>
+    <update id="descPoint">
+        update user set user_points=user_points-#{thePoint} where user_id=#{userId};
+    </update>
+    <update id="changeUserAvatar">
+        update user set user_avatar=#{avatar} where user_id=#{userId};
+    </update>
+    <select id="selectUserByUserId" resultMap="BaseResultMap" parameterType="int">
+        select user_id,user_nickname,user_gender,user_age,user_tel
+        ,user_registerDate,user_code from user where user_id=#{openid};
+    </select>
+    <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="String">
+        select user_id,user_nickname,user_gender,user_age,user_tel
+             ,user_registerDate from user where user_nickname like '%${userName}%' ;
+    </select>
+    <select id="selectAllUserASC" resultMap="BaseResultMap" parameterType="integer">
+        select user_id,user_nickname,user_gender,user_age,user_tel
+        ,user_registerDate from user order by user_id ASC limit #{startNum},10;</select>
+    <select id="selectAllUserDESC" resultMap="BaseResultMap" parameterType="integer">
+        select user_id,user_nickname,user_gender,user_age,user_tel
+             ,user_registerDate from user order by user_id DESC limit #{startNum},10 ;
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from user;
+    </select>
+    <select id="selectUserByOpenId" resultMap="BaseResultMap">
+        select * from user where user_openid=#{userOpenId};
+    </select>
+    <select id="identifying" resultMap="BaseResultMap">
+        select * from user where user_id=#{userId};
+    </select>
+    <select id="queryPoint" resultType="java.lang.Integer">
+        select user_points from user where user_id=#{userId};
+    </select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pengling.beauty.mapper.CompositionMapper">
+    <resultMap id="BaseResultMap" type="com.pengling.beauty.entity.Composition">
+        <result column="composition_id" jdbcType="INTEGER" property="compositionId"></result>
+        <result column="composition_name" jdbcType="VARCHAR" property="compositionName"></result>
+        <result column="composition_security_low" jdbcType="VARCHAR" property="compositionSecurityLow"></result>
+        <result column="composition_security_high" jdbcType="VARCHAR" property="compositionSecurityHigh"></result>
+        <result column="composition_activity" jdbcType="VARCHAR" property="compositionActivity"></result>
+        <result column="composition_causeAcne" jdbcType="VARCHAR" property="compositionCauseAcne"></result>
+        <result column="composition_aim" jdbcType="VARCHAR" property="compositionAim"></result>
+        <result column="YFCannot" jdbcType="VARCHAR" property="YFCannot"></result>
+        <result column="JJ" jdbcType="VARCHAR" property="JJ"></result>
+        <result column="FFJ" jdbcType="VARCHAR" property="FFJ"></result>
+        <result column="ZDCF" jdbcType="VARCHAR" property="ZDCF"></result>
+        <result column="XJ" jdbcType="VARCHAR" property="XJ"></result>
+        <result column="FX" jdbcType="VARCHAR" property="FX"></result>
+    </resultMap>
+    <select id="queryCompositionInfo" resultMap="BaseResultMap">
+        select * from composition where composition_name=#{compositionName};
+    </select>
+    <!--    排序前五种主要成分-->
+</mapper>

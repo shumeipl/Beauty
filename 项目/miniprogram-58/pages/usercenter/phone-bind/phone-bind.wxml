@@ -1,0 +1,5 @@
+<view class="box">
+<input class="phoneNumber" bindinput="getPhoneNumber" name="phoneNumber" placeholder="输入手机号"/>
+<view class="send" bindtap="send">下一步</view>
+</view>
+

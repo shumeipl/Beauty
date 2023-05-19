@@ -1,0 +1,15 @@
+/* pages/bangdan/bangdan.wxss */
+.left-img{
+  width: 180rpx;
+  height: 180rpx;
+  margin-left: 20rpx;
+}
+.scoreList{
+ margin-top:20rpx;
+  display: flex;
+}
+.PM{
+  color:goldenrod;
+  font-size: larger;
+  font-weight: 600;
+}

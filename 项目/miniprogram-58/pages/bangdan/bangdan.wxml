@@ -1,0 +1,11 @@
+<view style="color: gold;text-align: center;">{{name}}榜单</view>
+<view wx:for="{{scoreList}}" wx:key="index" class="scoreList" data-index="{{item.good.goodId}}" bindtap="gotoDetail">
+<view class="PM">{{index+1}}</view>
+<image class="left-img" src="{{item.good.goodImg1}}"></image>
+<view style="margin-left: 30rpx;">
+<view style="margin-top: 20rpx;">{{item.good.goodName}}</view>
+<view style="margin-left: 450rpx; color: gold;font-weight: 550;">{{item.goodAvgScore}}</view>
+<view style="font-size: small;color: gray; margin-top: 20rpx;">{{item.good.goodIntro}}</view>
+</view>
+</view>
+

@@ -1,0 +1,71 @@
+<view
+class="wr-goods-card card-class {{ layout }} {{ centered ? 'center' : ''}}"
+ bind:tap="clickHandle"
+ data-goods="{{ goods }}"
+ hidden="{{hiddenInData}}"
+>
+<view wx:for="{{goods}}"  wx:key="index">
+	<view class="wr-goods-card__main">
+		<view class="wr-goods-card__thumb thumb-class" bind:tap="clickThumbHandle">
+			<!-- data-src 是方便加购动画读取图片用的 -->
+			<t-image
+			 t-class="wr-goods-card__thumb-com"
+			 wx:if="{{ !!item.goodImage1 && !goods.hideKey.thumb }}"
+			 src="{{item.goodImage1 }}"
+			 mode="{{ thumbMode }}"
+			 lazy-load="{{ lazyLoad }}"
+			/>
+			<slot name="thumb-cover" />
+		</view>
+		<view class="wr-goods-card__body">
+			<view class="wr-goods-card__long_content">
+				<view wx:if="{{item.goodName && !item.hideKey.title }}" class="wr-goods-card__title title-class" style="-webkit-line-clamp: {{ goods.lineClamp }};">
+					<slot name="before-title" />
+					{{ item.goodName }}
+				</view>
+				<slot name="after-title" />
+				<view wx:if="{{ goods.desc && !goods.hideKey.desc }}" class="wr-goods-card__desc desc-class">{{ goods.desc }}</view>
+				<slot name="after-desc" />
+				<view class="goods_tips" wx:if="{{goods.stockQuantity !== 0 && goods.quantity >= goods.stockQuantity}}">库存不足</view>
+			</view>
+
+			<!-- <view class="wr-goods-card__short_content">
+				<block wx:if="{{goods.stockQuantity !== 0}}">
+					<view wx:if="{{ pricePrefix }}" class="wr-goods-card__price__prefix price-prefix-class">{{ pricePrefix }}</view>
+					<slot name="price-prefix" /> -->
+					<!-- <view wx:if="{{ item.goodPrice && !item.hideKey.price }}" class="wr-goods-card__price">
+						<price
+						 wr-class="price-class"
+						 symbol="{{currency}}"
+						 price="{{item.goodPrice*100}}"
+						 fill="{{priceFill}}"
+						 decimalSmaller
+						/>
+					</view> -->
+					<!-- <view wx:if="{{ item.originPrice && !item.hideKey.originPrice && isValidityLinePrice }}" class="wr-goods-card__origin-price">
+						<price
+						 wr-class="origin-price-class"
+						 symbol="{{currency}}"
+						 price="{{item.originPrice}}"
+						 fill="{{priceFill}}"
+						/>
+					</view> -->
+					<!-- <slot name="origin-price" /> -->
+					<view class="wr-goods-card__num num-class">
+						<text class="wr-goods-card__num__prefix">x </text>
+						{{item.goodNum}}
+					</view> 
+				<!-- </block>  -->
+				<!-- <block wx:else>
+					<view class="no_storage">
+						<view>请重新选择商品规格</view>
+						<view class="no_storage__right">重选</view>
+					</view>
+				</block> -->
+
+			</view>
+		</view>
+	</view>	
+<!-- <!-- </view> -->
+</view>
+
